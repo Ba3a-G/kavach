@@ -1,5 +1,12 @@
 {
-  "name": "kavach",
+  "name": "@ba3a-g/kavach",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ba3a-G/kavach.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,5 +23,6 @@
     "clean": "rm -rf dist",
     "prepareToPublish": "npm run clean && npm run build"
   },
-  "type": "module"
+  "type": "module",
+  "version": "0.0.1"
 }
