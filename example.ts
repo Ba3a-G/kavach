@@ -71,7 +71,7 @@ const qrSignature = qrBuffer.slice(0, 64);
 const qrData = qrBuffer.slice(64);
 
 // Verifying signature
-const isValid = Signer.verify(qrData.toString('base64'), new Uint8Array(qrSignature).buffer, fs.readFileSync("./.keys/gov_pub.pem", "utf-8"));
+const isValid = Signer.verify(qrData.toString('base64'), new Uint8Array(qrSignature), fs.readFileSync("./.keys/gov_pub.pem", "utf-8"));
 console.log('Is signature valid?', isValid);
 
 // Finally decoding data from QRBuffer
