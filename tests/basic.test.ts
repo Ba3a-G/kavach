@@ -23,7 +23,7 @@ describe("Encoder", () => {
         const encoded = Encoder.encodeString(testString);
         const decoded = Encoder.decodeString(encoded);
 
-        expect(decoded.toUpperCase()).toBe(testString.toUpperCase());
+        expect(decoded.data.toUpperCase()).toBe(testString.toUpperCase());
       });
     });
 
@@ -33,14 +33,14 @@ describe("Encoder", () => {
       edgeCases.forEach((testString) => {
         const encoded = Encoder.encodeString(testString);
         const decoded = Encoder.decodeString(encoded);
-        expect(decoded.toUpperCase()).toBe(testString.toUpperCase());
+        expect(decoded.data.toUpperCase()).toBe(testString.toUpperCase());
       });
     });
 
     negativeTestStrings.forEach((testString) => {
       const encoded = Encoder.encodeString(testString);
       const decoded = Encoder.decodeString(encoded);
-      expect(decoded.toUpperCase()).not.toBe(testString.toUpperCase());
+      expect(decoded.data.toUpperCase()).not.toBe(testString.toUpperCase());
     });
   });
 
@@ -105,7 +105,7 @@ describe("Encoder", () => {
       ];
 
       AadhaarNumbers.forEach((number) => {
-        const encoded = Encoder.encodeAadhaar(parseInt(number));
+        const encoded = Encoder.encodeAadhaarNumber(parseInt(number));
         const decoded = Encoder.decodeAadhaar(encoded);
 
         expect(decoded).toBe(parseInt(number));
@@ -137,7 +137,7 @@ describe("Encoder", () => {
       const decodedDOB = Encoder.decodeDOB(encodedDOB);
 
       // Assert all
-      expect(decodedString.toUpperCase()).toBe(testData.string.toUpperCase());
+      expect(decodedString.data.toUpperCase()).toBe(testData.string.toUpperCase());
       expect(decodedVersion).toBe(testData.version);
       expect(encodedGender).toBe(testData.gender);
       expect(decodedDOB).toEqual(testData.dob);

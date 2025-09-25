@@ -20,9 +20,10 @@ let gender = "Male" as DecodedGender; // See type def for allowed values
 let aadhaar = 123456789012; // 12 digit number
 let dob = { day: 1, month: 1, year: 2000 }; // Date of Birth
 let name = "Aryan Kumar"; // Will be truncated to 19 chars
+let pan = "ABCDE1234F"; // 10 char PAN
 
 const encoder = new Encoder()
-let encoded = encoder.encodeData(
+let encoded = encoder.encodeAadhaarData(
     version,
     gender,
     aadhaar,
@@ -75,4 +76,4 @@ const isValid = Signer.verify(qrData.toString('base64'), new Uint8Array(qrSignat
 console.log('Is signature valid?', isValid);
 
 // Finally decoding data from QRBuffer
-console.log(encoder.decodeData(new Uint8Array(qrData).buffer));
+console.log(encoder.decodeAadhaarData(new Uint8Array(qrData).buffer));
