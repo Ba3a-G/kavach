@@ -23,7 +23,7 @@
     "prepareToPublish": "npm run clean && npm run build"
   },
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "@noble/curves": "^2.0.1",
     "@noble/hashes": "^2.0.1"
