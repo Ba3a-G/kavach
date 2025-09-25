@@ -3,7 +3,7 @@ export class Signer {
     privateKeyBytes;
     publicKeyBytes;
     constructor(privateKeyString) {
-        this.privateKeyBytes = this.parsePrivateKeyPEM(privateKeyString);
+        this.privateKeyBytes = Signer.parsePrivateKeyPEM(privateKeyString);
         this.publicKeyBytes = ed25519.getPublicKey(this.privateKeyBytes);
         // check if there is crypto module available, if not, throw error
         try {
@@ -14,7 +14,7 @@ export class Signer {
             require("react-native-get-random-values");
         }
     }
-    parsePrivateKeyPEM(pemString) {
+    static parsePrivateKeyPEM(pemString) {
         const base64String = pemString
             .replace(/-----BEGIN PRIVATE KEY-----/g, '')
             .replace(/-----END PRIVATE KEY-----/g, '')
@@ -24,7 +24,7 @@ export class Signer {
         // Extract Ed25519 private key from PKCS#8 DER structure
         return this.extractEd25519PrivateKey(derBytes);
     }
-    base64ToUint8Array(base64) {
+    static base64ToUint8Array(base64) {
         // For React Native/browser environments
         if (typeof atob !== 'undefined') {
             const binaryString = atob(base64);
@@ -40,7 +40,7 @@ export class Signer {
         }
         throw new Error('No base64 decoder available');
     }
-    extractEd25519PrivateKey(derBytes) {
+    static extractEd25519PrivateKey(derBytes) {
         const ed25519OID = new Uint8Array([0x2B, 0x65, 0x70]);
         let oidFound = false;
         for (let i = 0; i < derBytes.length - 3; i++) {
@@ -73,7 +73,7 @@ export class Signer {
         const base64 = this.uint8ArrayToBase64(publicKeyDER);
         return [
             '-----BEGIN PUBLIC KEY-----',
-            ...this.splitIntoLines(base64, 64),
+            ...Signer.splitIntoLines(base64, 64),
             '-----END PUBLIC KEY-----'
         ].join('\n');
     }
@@ -106,18 +106,18 @@ export class Signer {
         return result;
     }
     uint8ArrayToBase64(bytes) {
-        // For React Native/browser environments
-        if (typeof btoa !== 'undefined') {
-            const binaryString = String.fromCharCode(...bytes);
-            return btoa(binaryString);
-        }
+        // // For React Native/browser environments
+        // if (typeof btoa !== 'undefined') {
+        //   const binaryString = String.fromCharCode(...bytes);
+        //   return btoa(binaryString);
+        // }
         // For Node.js environments
         if (typeof Buffer !== 'undefined') {
             return Buffer.from(bytes).toString('base64');
         }
         throw new Error('No base64 encoder available');
     }
-    splitIntoLines(str, lineLength) {
+    static splitIntoLines(str, lineLength) {
         const lines = [];
         for (let i = 0; i < str.length; i += lineLength) {
             lines.push(str.substr(i, lineLength));
@@ -138,14 +138,14 @@ export class Signer {
     }
     static base64ToUint8ArrayStatic(base64) {
         // For React Native/browser environments
-        if (typeof atob !== 'undefined') {
-            const binaryString = atob(base64);
-            const bytes = new Uint8Array(binaryString.length);
-            for (let i = 0; i < binaryString.length; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            return bytes;
-        }
+        // if (typeof atob !== 'undefined') {
+        //   const binaryString = atob(base64);
+        //   const bytes = new Uint8Array(binaryString.length);
+        //   for (let i = 0; i < binaryString.length; i++) {
+        //     bytes[i] = binaryString.charCodeAt(i);
+        //   }
+        //   return bytes;
+        // }
         // For Node.js environments
         if (typeof Buffer !== 'undefined') {
             return new Uint8Array(Buffer.from(base64, 'base64'));
