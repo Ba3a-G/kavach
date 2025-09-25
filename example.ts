@@ -6,14 +6,14 @@ This library only exports the Encoder (which also includes the decoder lol) and 
 */
 
 
-import { Encoder } from "@/encoder";
-import { Signer } from "@/signer";
+import { Encoder } from "./src/encoder";
+import { Signer } from "./src/signer";
 import fs from "fs";
 import QRCode from "qrcode";
 import QRCodeReader from 'qrcode-reader';
 import { Jimp } from 'jimp';
 
-import type { DecodedGender, DecodedVersion } from "@/types";
+import type { DecodedGender, DecodedVersion } from "./src/types";
 
 let version = 1 as DecodedVersion; // three bits, use 1 for now, see type def for allowed values
 let gender = "Male" as DecodedGender; // See type def for allowed values
