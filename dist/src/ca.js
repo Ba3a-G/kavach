@@ -1,5 +1,6 @@
 import { ed25519 } from "@noble/curves/ed25519.js";
 import { sha256 } from "@noble/hashes/sha2.js";
+import { randomBytes } from "@noble/hashes/utils.js";
 import { Signer } from "./signer";
 export class CA {
     publicKeyBytes;
@@ -9,8 +10,7 @@ export class CA {
         this.publicKeyBytes = ed25519.getPublicKey(this.privateKeyBytes);
     }
     generateAadhaarCertificate(csrData, userPublicKeyBytes) {
-        const randomBytes = crypto.getRandomValues(new Uint8Array(8));
-        const serial = sha256(new Uint8Array([...Buffer.from(JSON.stringify(csrData)), ...Buffer.from(randomBytes)])).toBase64();
+        const serial = sha256(new Uint8Array([...Buffer.from(JSON.stringify(csrData)), ...Buffer.from(randomBytes(8))])).toBase64();
         const issuer = sha256(new Uint8Array(this.publicKeyBytes)).toBase64();
         const validFrom = String(Date.now());
         const validTo = String(validFrom + 180 * 24 * 60 * 60 * 1000); // 180 days validity
