@@ -33,7 +33,7 @@ let encoded = encoder.encodePANData(
 console.log(encoded);
 
 // Signing the data
-const signer = new Signer(fs.readFileSync("../.keys/gov.pem", "utf-8"));
+const signer = new Signer(fs.readFileSync("./.keys/gov.pem", "utf-8"));
 const signature = signer.sign(Buffer.from(encoded).toString('base64')); // Returns 64 byte signature
 console.log('Signature:', Buffer.from(signature).toString('base64'));
 
@@ -71,7 +71,7 @@ const qrSignature = qrBuffer.slice(0, 64);
 const qrData = qrBuffer.slice(64);
 
 // Verifying signature
-const isValid = Signer.verify(qrData.toString('base64'), new Uint8Array(qrSignature), fs.readFileSync("../.keys/gov_pub.pem", "utf-8"));
+const isValid = Signer.verify(qrData.toString('base64'), new Uint8Array(qrSignature), fs.readFileSync("./.keys/gov_pub.pem", "utf-8"));
 console.log('Is signature valid?', isValid);
 
 // Finally decoding data from QRBuffer
