@@ -1,4 +1,4 @@
-import {} from "@/types";
+import {} from "./types";
 export const Charset = {
     A: "00000",
     B: "00001",

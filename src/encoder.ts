@@ -1,4 +1,4 @@
-import { Charset, ReverseCharset } from "@/mappings";
+import { Charset, ReverseCharset } from "./mappings";
 import type {
   DecodedVersion,
   EncodedChar,

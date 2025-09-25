@@ -1,4 +1,4 @@
-export { Encoder } from "@/encoder";
-export { Signer } from "@/signer";
+export { Encoder } from "./src/encoder";
+export { Signer } from "./src/signer";
 
-export * from "@/types";
+export * from "./src/types";

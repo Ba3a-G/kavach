@@ -1,4 +1,4 @@
-import { type EncodedChar } from "@/types";
+import { type EncodedChar } from "./types";
 
 export const Charset: Record<string, EncodedChar> = {
   A: "00000",
