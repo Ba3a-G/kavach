@@ -130,10 +130,10 @@ export class Signer {
 
   private uint8ArrayToBase64(bytes: Uint8Array): string {
     // // For React Native/browser environments
-    // if (typeof btoa !== 'undefined') {
-    //   const binaryString = String.fromCharCode(...bytes);
-    //   return btoa(binaryString);
-    // }
+    if (typeof btoa !== 'undefined') {
+      const binaryString = String.fromCharCode(...bytes);
+      return btoa(binaryString);
+    }
     
     // For Node.js environments
     if (typeof Buffer !== 'undefined') {
@@ -168,14 +168,14 @@ export class Signer {
 
   private static base64ToUint8ArrayStatic(base64: string): Uint8Array {
     // For React Native/browser environments
-    // if (typeof atob !== 'undefined') {
-    //   const binaryString = atob(base64);
-    //   const bytes = new Uint8Array(binaryString.length);
-    //   for (let i = 0; i < binaryString.length; i++) {
-    //     bytes[i] = binaryString.charCodeAt(i);
-    //   }
-    //   return bytes;
-    // }
+    if (typeof atob !== 'undefined') {
+      const binaryString = atob(base64);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      return bytes;
+    }
     
     // For Node.js environments
     if (typeof Buffer !== 'undefined') {
